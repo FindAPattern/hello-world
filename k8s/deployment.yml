@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: web
+        image: gcr.io/stephenmann-cloud-build/hello-world:v1.0.0
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
